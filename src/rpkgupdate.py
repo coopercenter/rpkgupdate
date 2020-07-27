@@ -113,7 +113,8 @@ def main():
         print("\nDependencies Collected. Installing!")
 
         # getting a little jank here but it works. Might improve later...
-        pkgs_to_install.append('devtools')
+        pkgs_to_install = []
+        """pkgs_to_install.append('devtools')
         pkgs_to_install.append('pkgconfig')
         pkgs_to_install.append('latticeExtra')
         pkgs_to_install.append('cowplot')
@@ -121,11 +122,16 @@ def main():
         pkgs_to_install.append('car')
         pkgs_to_install.append('XML')
         pkgs_to_install.append('scholar')
-        pkgs_to_install.append('dependencies = TRUE')
+        pkgs_to_install.append('dependencies = TRUE')"""
 
         pkgs_to_install += [x for x in r_pkgs if not rpackages.isinstalled(x)]
 
-        if len(pkgs_to_install) > 9:
+        # remove any double quotes
+        pkgs_to_install = [i.replace('"', '') for i in pkgs_to_install]
+
+        print("\nNeed to install " + str(pkgs_to_install) + " packages...\n")
+
+        if len(pkgs_to_install) > 0:
             utils.install_packages(StrVector(pkgs_to_install))
         else:
             print("All packages up to date!")
