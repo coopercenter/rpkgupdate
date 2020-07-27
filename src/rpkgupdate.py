@@ -114,6 +114,7 @@ def main():
             print(e.output)
         '''
         
+        pkgs_to_install.append('devtools')
         pkgs_to_install.append('dependencies = TRUE')
         if len(pkgs_to_install) > 0:
             utils.install_packages(StrVector(pkgs_to_install))
